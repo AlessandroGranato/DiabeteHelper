@@ -1,0 +1,43 @@
+# complete list link: https://github.com/github/gitignore
+
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# folders #
+target/
+sonarlint/
+
+
+# intellij #
+.idea/
+*.iml
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Eclipse specific guide: https://github.com/github/gitignore/blob/master/Global/Eclipse.gitignore
+
+
+#Specific files
+Git Info/ProvaPrimeOperazioni/ProvaNoComit.txt
+Knowledge/ZZZ_FileProvaDaNonCommittare.docx
+Knowledge/Java/Lambda-lezione_17_10_2018.mp4
+Knowledge/Java/thread, collection/lezione_14_11_2018.mp4
