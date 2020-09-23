@@ -76,6 +76,7 @@ public class AlimentResource {
 
         String text = "";
         for (CalculatorDTO calculatorDTO : calculatorDTOS) {
+            LOG.info("Single calculatorDTO: " +  calculatorDTO.toString());
             text += calculatorDTO.getAlimentName();
         }
 

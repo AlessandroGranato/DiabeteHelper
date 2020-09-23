@@ -14,14 +14,16 @@ function sendJSON(){
             // Set the request header i.e. which type of content you are sending 
             xhr.setRequestHeader("Content-Type", "application/json"); 
 
-  
             // Converting JSON data to string 
-            //var data = JSON.stringify({ "name": name.value, "email": email.value });
+            //var values = JSON.stringify([{ "alimentName": "Prova1", "quantity": 123 }]);
 
-            var data = JSON.stringify(getCellValues());
+            var values = getCellValues();
+            console.log(values);
+
+            var data = JSON.stringify(values);
 
             // Sending data with the request 
-            xhr.send(data);
+            xhr.send(values);
 
 
             // Create a state change callback
