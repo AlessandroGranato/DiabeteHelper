@@ -29,6 +29,14 @@
       <scope>provided</scope>
     </dependency>
 
+    <!-- Logging - See this guide: https://www.marcobehler.com/guides/a-guide-to-logging-in-java#_modern_logging_libraries -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.25</version>
+    </dependency>
+
+
     <!-- Auto Mapper -->
     <dependency>
       <groupId>net.sf.dozer</groupId>

@@ -1,8 +1,10 @@
 package com.pyrosandro.config;
 
 
-import org.apache.log4j.Logger;
+
 import org.dozer.DozerBeanMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
@@ -21,7 +23,7 @@ public class DiabeteProducers {
 
     @Produces
     public Logger produceLogger(InjectionPoint injectionPoint) {
-        return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
+        return LoggerFactory.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
     }
 
     //Auto mapper

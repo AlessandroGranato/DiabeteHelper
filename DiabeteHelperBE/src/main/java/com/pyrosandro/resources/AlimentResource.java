@@ -6,7 +6,8 @@ import com.pyrosandro.DTO.CalculatorDTO;
 import com.pyrosandro.entities.Aliment;
 import com.pyrosandro.services.AlimentService;
 import com.pyrosandro.utils.DiabeteMapper;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
