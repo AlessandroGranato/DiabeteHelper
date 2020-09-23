@@ -56,10 +56,10 @@ function getCellValues() {
     var data = [];
     var table = document.getElementById('alimentsTable');
     for (var r = 0, n = table.rows.length; r < n; r++) {
-    	var val1 = table.rows[r].cells[0].children[0].value;
-      var val2 = table.rows[r].cells[1].children[0].value;
+        var name = table.rows[r].cells[0].children[0].value;
+        var quantity = table.rows[r].cells[1].children[0].value;
      // data.push("{\"name\"": + "\"" + val1 + "\" , \"quantity\": " + val2 + "}");
-     data.push("{\"name\": " + "\"val1\"" + ", \"quantity\": " + val2 + "}");
+        data.push("{\"alimentName\": " + "\"" + name + "\" , \"quantity\": " + quantity + "}");
     }
     var text = "[" + data.toString() + "]";
     console.log(data);
