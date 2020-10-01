@@ -1,6 +1,8 @@
 package com.pyrosandro.resources;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.pyrosandro.DTO.AlimentDTO;
 import com.pyrosandro.DTO.CalculatorDTO;
 import com.pyrosandro.entities.Aliment;
@@ -13,6 +15,10 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -72,16 +78,22 @@ public class AlimentResource {
     public Response calculateInsulin(String input) {
 
         LOG.info("Input string: " + input);
-        Gson gson = new Gson();
-        CalculatorDTO[] calculatorDTOS = gson.fromJson(input, CalculatorDTO[].class);
 
-        String text = "";
-        for (CalculatorDTO calculatorDTO : calculatorDTOS) {
-            LOG.info("Single calculatorDTO: " +  calculatorDTO.toString());
-            text += calculatorDTO.getAlimentName();
-        }
+        Float insulin = alimentService.calculateInsulin(input);
 
-        return Response.ok(text).build();
+//        Gson gson = new Gson();
+//        CalculatorDTO[] calculatorDTOS = gson.fromJson(input, CalculatorDTO[].class);
+//
+//
+//        String text = "";
+//        for (CalculatorDTO calculatorDTO : calculatorDTOS) {
+//            LOG.info("Single calculatorDTO: " +  calculatorDTO.toString());
+//            text += calculatorDTO.getAlimentName();
+//        }
+//
+//        return Response.ok(text).build();
+
+        return Response.ok(insulin).build();
     }
 
 

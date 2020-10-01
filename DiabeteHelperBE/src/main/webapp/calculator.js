@@ -1,8 +1,9 @@
 function sendJSON(){ 
 
             let result = document.querySelector('.result'); 
-            let name = document.querySelector('#name'); 
-            let email = document.querySelector('#email'); 
+            let glycemiaCurrentValue = document.querySelector('#glycemiaCurrentValue');
+            let lastInsulinQuantity = document.querySelector('#lastInsulinQuantity');
+            let lastInsulinDatetime = document.querySelector('#lastInsulinDatetime');
                
             // Creating a XHR object 
             let xhr = new XMLHttpRequest(); 
@@ -17,13 +18,26 @@ function sendJSON(){
             // Converting JSON data to string 
             //var values = JSON.stringify([{ "alimentName": "Prova1", "quantity": 123 }]);
 
-            var values = getCellValues();
-            console.log(values);
+            var alimentValues = getCellValues();
+            console.log("alimentValues");
+            console.log(alimentValues);
 
-            var data = JSON.stringify(values);
+            var data = {};
+            data.glycemiaCurrentValue = glycemiaCurrentValue.value;
+            data.lastInsulinQuantity = lastInsulinQuantity.value;
+            data.lastInsulinDatetime = lastInsulinDatetime.value;
+            data.alimentValues = alimentValues;
+
+            console.log("data");
+            console.log(data);
+
+            var jsonString = JSON.stringify(data);
+
+            console.log("jsonString");
+            console.log(jsonString);
 
             // Sending data with the request 
-            xhr.send(values);
+            xhr.send(jsonString);
 
 
             // Create a state change callback
@@ -59,9 +73,10 @@ function getCellValues() {
         var name = table.rows[r].cells[0].children[0].value;
         var quantity = table.rows[r].cells[1].children[0].value;
      // data.push("{\"name\"": + "\"" + val1 + "\" , \"quantity\": " + val2 + "}");
-        data.push("{\"alimentName\": " + "\"" + name + "\" , \"quantity\": " + quantity + "}");
+        data.push({"alimentName": name, "quantity" : quantity});
     }
     var text = "[" + data.toString() + "]";
+    console.log("getCellValues");
     console.log(data);
-    return text;
+    return data;
 }
