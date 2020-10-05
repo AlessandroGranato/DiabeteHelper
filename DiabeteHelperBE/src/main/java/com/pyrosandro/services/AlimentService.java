@@ -52,6 +52,7 @@ public class AlimentService {
             entityManager.merge(aliment);
         }
 
+        LOG.info("Aliment id is: " + aliment.getId());
         return aliment;
     }
 

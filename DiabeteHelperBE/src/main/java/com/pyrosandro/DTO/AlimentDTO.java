@@ -2,6 +2,7 @@ package com.pyrosandro.DTO;
 
 public class AlimentDTO {
 
+    private Long id;
     private String name;
     private Float energy;
     private Float fat;
@@ -11,6 +12,14 @@ public class AlimentDTO {
     private Float fibers;
     private Float proteins;
     private Float salt;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -87,7 +96,8 @@ public class AlimentDTO {
     @Override
     public String toString() {
         return "AlimentDTO{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", energy=" + energy +
                 ", fat=" + fat +
                 ", saturatedFat=" + saturatedFat +
