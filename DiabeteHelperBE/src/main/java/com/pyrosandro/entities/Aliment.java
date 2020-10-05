@@ -109,6 +109,7 @@ public class Aliment extends AbstractEntity {
                 ", fibers=" + fibers +
                 ", proteins=" + proteins +
                 ", salt=" + salt +
+                ", id=" + id +
                 '}';
     }
 }

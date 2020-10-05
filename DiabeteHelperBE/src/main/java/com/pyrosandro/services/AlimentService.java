@@ -17,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 @Stateless
 public class AlimentService {
@@ -51,6 +52,7 @@ public class AlimentService {
             entityManager.merge(aliment);
         }
 
+        LOG.info("Aliment id is: " + aliment.getId());
         return aliment;
     }
 
@@ -101,6 +103,32 @@ public class AlimentService {
         return totalInsulin;
     }
 
+    public Float calculateInsulin(Float glycemiaCurrentValue, Float lastInsulinQuantity, LocalTime lastInsulinDateTime, Map<String, Float> alimentsWithQuantities) {
+
+        // To calculate the insulin we need to take care of three factors: residualInsulin, glycemiaCurrentValue and totalCarbs we are eating
+        Float totalInsulin = 0F;
+        Float totalCarbs = 0F;
+
+        LOG.info("glycemiaCurrentValue: " + glycemiaCurrentValue);
+        LOG.info("lastInsulinQuantity: " + lastInsulinQuantity);
+        LOG.info("lastInsulinDateTime: " + lastInsulinDateTime);
+
+        Float residualInsulin = calculateResidualInsulin(lastInsulinQuantity, lastInsulinDateTime);
+
+        Float correctiveInsulin = calculateCorrectiveInsulin(glycemiaCurrentValue);
+
+        totalCarbs = calculateCarbs(alimentsWithQuantities);
+        Float insulinForCarbs = totalCarbs / CARBS_PER_INSULIN_UNIT_DECREASE;
+
+        LOG.info("residualInsulin: " + residualInsulin);
+        LOG.info("correctiveInsulin: " + correctiveInsulin);
+        LOG.info("insulinForCarbs: " + insulinForCarbs);
+
+        totalInsulin =  correctiveInsulin + insulinForCarbs - residualInsulin;
+
+        return totalInsulin;
+    }
+
     public Float calculateCarbs(JsonArray alimentValuesArray) {
 
         Aliment aliment;
@@ -115,6 +143,21 @@ public class AlimentService {
             LOG.info("Current Aliment info: " + aliment.toString());
             totalCarbs += aliment.getCarbs() * currentAlimentQuantity / 100;
         }
+        LOG.info ("Total Carbs = " + totalCarbs);
+        return totalCarbs;
+    }
+
+    public Float calculateCarbs(Map<String, Float> alimentsAndQuantities) {
+
+        Aliment aliment;
+        Float totalCarbs = 0F;
+
+        for(Map.Entry<String, Float> entry : alimentsAndQuantities.entrySet()) {
+            aliment = getAlimentByName(entry.getKey());
+            LOG.info("Current Aliment info: " + aliment.toString());
+            totalCarbs += aliment.getCarbs() * entry.getValue() / 100;
+        }
+
         LOG.info ("Total Carbs = " + totalCarbs);
         return totalCarbs;
     }
@@ -153,4 +196,6 @@ public class AlimentService {
 
         return correctiveInsulin;
     }
+
+
 }
